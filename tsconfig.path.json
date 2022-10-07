@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@home": ["./src/home"],
+            "@capsule": ["./src/capsule"],
+            "@mission": ["./src/mission"],
+            "@rocket": ["./src/rocket"],
+            "@page_layout": ["./src/page_layout"],
+            "@page_not_found": ["./src/page_not_found"],
+            "@shared": ["./src/shared"]
+        }
+    }
+}

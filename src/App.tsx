@@ -1,26 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Provider } from 'urql';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import { AppRoutes, SharedTypes, Theme, Client } from '@shared';
+import { PageLayout } from './page_layout';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Provider value={Client.client}>
+            <ThemeProvider theme={Theme.dark}>
+                <CssBaseline />
+                <Router>
+                    <Routes>
+                        <Route element={<PageLayout />}>{AppRoutes.map(renderRoutes)}</Route>
+                    </Routes>
+                </Router>
+            </ThemeProvider>
+        </Provider>
+    );
 }
+
+const renderRoutes = ({ element, path }: SharedTypes.IRoute): React.ReactElement => {
+    return (
+        <Route
+            element={element}
+            path={path}
+            key={path}
+        />
+    );
+};
 
 export default App;
