@@ -4,4 +4,4 @@ export * as Hooks from './hooks';
 export * as Theme from './theme';
 export * as SharedTypes from './types';
 export * as Utils from './utils';
-export { Paths, AppRoutes } from './routes';
+export { Paths, AppRoutes, MenuRoutes } from './routes';

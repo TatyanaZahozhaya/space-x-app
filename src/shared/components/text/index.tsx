@@ -48,11 +48,14 @@ export const DescriptionText: FC<IText> = memo(({ text }) => {
 });
 
 export const NavigationText: FC<IText> = memo(({ text }) => {
-    return <Typography><LinkStyled to={`${Paths.HOME}`}>{text}</LinkStyled></Typography>;
+    return (
+        <Typography>
+            <LinkStyled to={`${Paths.HOME}`}>{text}</LinkStyled>
+        </Typography>
+    );
 });
 
 export const InfoHeaderText: FC<IText> = memo(({ text }) => {
-    
     return (
         <Typography
             variant="h5"
@@ -70,6 +73,9 @@ export const InfoSubHeaderText: FC<IText> = memo(({ text }) => {
             component="div"
             sx={{
                 m: `${spacing(3)} 0 ${spacing(1)} 0`,
+                '@media (max-width: 530px)': {
+                    fontSize: '0.9rem',
+                },
             }}>
             {text}
         </Typography>
@@ -85,12 +91,14 @@ export const InfoText: FC<IText> = memo(({ text }) => {
             sx={{
                 textAlign: 'justify',
                 m: `${spacing(2)} 0`,
+                '@media (max-width: 530px)': {
+                    fontSize: '0.9rem',
+                },
             }}>
             {text}
         </Typography>
     );
 });
-
 
 export const ParamNameText: FC<IText> = memo(({ text }) => {
     return (
@@ -106,9 +114,11 @@ export const ParamText: FC<IText> = memo(({ text }) => {
     return (
         <Typography
             variant="body2"
-            component="div">
+            component="div"
+            sx={{
+                textAlign: 'right',
+            }}>
             {text}
         </Typography>
     );
 });
-

@@ -2,6 +2,11 @@ export interface IRoute {
     element: React.ReactElement;
     path: string;
 }
+export interface IMenuRoute {
+    name: string;
+    hook(): Array<any>;
+    path: string;
+}
 
 export interface IDataSection {
     id: string;

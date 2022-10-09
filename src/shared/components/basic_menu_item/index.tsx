@@ -2,56 +2,35 @@ import { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import MenuItem from '@mui/material/MenuItem';
 import styled from '@emotion/styled';
-import { Paths } from '@shared';
-
-interface IMenuItem {
-    name?: string;
-    id?: string;
-    onClick?(e: React.MouseEvent): void;
-}
 
 interface IBasicMenuItem {
+    name: string;
+    id: string;
+    path: string;
     children?: React.ReactNode;
     onClick?(e: React.MouseEvent): void;
 }
 
 const LinkStyled = styled(Link)`
     text-decoration: none;
-    color: inherit;
+    display: block;
 `;
 
-const BasicMenuItem: FC<IBasicMenuItem> = ({ children, onClick }) => {
+export const BasicMenuItem: FC<IBasicMenuItem> = memo(({ name, id, path, onClick }) => {
     return (
-        <MenuItem
+        <LinkStyled
+            tabIndex={0}
             onClick={onClick}
-            sx={{
-                color: 'text.secondary',
-            }}>
-            {children}
-        </MenuItem>
-    );
-};
-
-export const BasicRocketMenuItem: FC<IMenuItem> = memo(({ name, id, onClick }) => {
-    return (
-        <BasicMenuItem onClick={onClick}>
-            <LinkStyled to={`${Paths.ROCKET}/${id}`}>{name}</LinkStyled>
-        </BasicMenuItem>
-    );
-});
-
-export const BasicCapsuleMenuItem: FC<IMenuItem> = memo(({ name, id, onClick }) => {
-    return (
-        <BasicMenuItem onClick={onClick}>
-            <LinkStyled to={`${Paths.CAPSULE}/${id}`}>{name}</LinkStyled>
-        </BasicMenuItem>
-    );
-});
-
-export const BasicMissionMenuItem: FC<IMenuItem> = memo(({ name, id, onClick }) => {
-    return (
-        <BasicMenuItem onClick={onClick}>
-            <LinkStyled to={`${Paths.MISSION}/${id}`}>{name}</LinkStyled>
-        </BasicMenuItem>
+            to={`${path}/${id}`}>
+            <MenuItem
+                sx={{
+                    color: 'text.secondary',
+                    '@media (max-width:670px)': {
+                        fontSize: '0.9rem',
+                    },
+                }}>
+                {name}
+            </MenuItem>
+        </LinkStyled>
     );
 });

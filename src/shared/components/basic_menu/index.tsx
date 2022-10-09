@@ -1,55 +1,47 @@
-import { useState, FC} from 'react';
-import { Button, Menu} from '@mui/material';
+import { useState, FC } from 'react';
+import { Menu } from '@mui/material';
+import { SharedComponents, Utils } from '@shared';
 import './index.css';
-import { SharedComponents } from '@shared';
 
 interface IBasicMenu {
+    path: string;
     name: string;
-    hook: any;
-    renderFunction( handleClose: () => void): any
+    hook(): Array<any>;
 }
 
-export const BasicMenu: FC<IBasicMenu> = ({ name, hook, renderFunction }) => {
+export const BasicMenu: FC<IBasicMenu> = ({ name, hook, path }) => {
+    const { renderMenuItem } = Utils;
+    const [arr, fetching, error, fetch] = hook();
+
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
-    const [arr, fetching, error, fetch] = hook();
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
         fetch();
     };
 
-    const handleClose = () => {
+    const handleClose = (event: React.KeyboardEvent | React.MouseEvent) => {
+        console.log(event.target);
         setAnchorEl(null);
     };
 
     if (!arr) {
-        return <SharedComponents.WarningMessage text="Information not found" />
+        return <SharedComponents.WarningMessage text="Information not found" />;
     }
 
     if (error) {
-        return <SharedComponents.WarningMessage text="Error. Please, try later." />
+        return <SharedComponents.WarningMessage text="Error. Please, try later." />;
     }
 
     return (
-        <div>
-            <Button
-                id="basic-button"
-                aria-controls={open ? 'basic-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
+        <SharedComponents.HeaderMenuBox>
+            <SharedComponents.HeaderMenuButton
+                name={name}
                 onClick={handleClick}
-                variant="outlined"
-                sx={{
-                    borderColor: 'secondary.main',
-                    borderRadius: '0',
-                    color: 'text.primary',
-                    '&:hover': {
-                        borderColor: 'secondary.main',
-                    },
-                }}>
-                {name}
-            </Button>
+                ariaControls={open ? 'basic-menu' : undefined}
+                ariaExpanded={open ? 'true' : undefined}
+            />
 
             <Menu
                 id="basic-menu"
@@ -59,11 +51,12 @@ export const BasicMenu: FC<IBasicMenu> = ({ name, hook, renderFunction }) => {
                 MenuListProps={{
                     'aria-labelledby': 'basic-button',
                 }}>
-                {fetching ? <SharedComponents.Progress/> : arr.map(renderFunction(handleClose))}
+                {fetching ? (
+                    <SharedComponents.Progress />
+                ) : (
+                    arr.map(renderMenuItem(handleClose, path))
+                )}
             </Menu>
-        </div>
+        </SharedComponents.HeaderMenuBox>
     );
 };
-
-
-

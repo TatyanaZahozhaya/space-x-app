@@ -359,7 +359,7 @@ export const useMissionQueryData = (mission: SharedTypes.IMission): SharedTypes.
             param: `${manufacturers && manufacturers.length ? manufacturers.join(', ') : '-'}`,
         },
         {
-            paramName: 'First flight: ',
+            paramName: 'Name: ',
             param: `${name ? name : '-'}`,
         },
     ];

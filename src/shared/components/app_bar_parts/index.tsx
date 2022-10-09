@@ -1,5 +1,6 @@
 import { FC, memo } from 'react';
 import { AppBar, Toolbar } from '@mui/material';
+import {  useTheme } from '@mui/material/styles';
 
 interface IAppBar {
     children?: React.ReactNode;
@@ -12,9 +13,20 @@ export const AppBarHeader: FC<IAppBar> = memo(({ children }) => {
 });
 
 export const ToolbarHeader: FC<IToolbar> = memo(({ children }) => {
+    const { spacing } = useTheme();
     return (
         <Toolbar
-            sx={{ display: 'grid', gridTemplateColumns: '90px 1fr 90px' }}>
+            sx={{
+                display: 'grid',
+                gridTemplateColumns: '90px 1fr 90px',
+                '@media (max-width:670px)': {
+                    gap: `${spacing(2)}`,
+                },
+                '@media (max-width:666px)': {
+                    gridTemplateColumns: '90px  90px',
+                    justifyContent: 'space-between'
+                },
+            }}>
             {children}
         </Toolbar>
     );

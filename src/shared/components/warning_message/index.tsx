@@ -11,7 +11,7 @@ export const WarningMessage: FC<IWarningMessage> = memo(({ text }) => {
     return (
         <Card
             sx={{
-                minWidth: 275,
+                minWidth: 250,
                 textAlign: 'center',
                 padding: `${spacing(1)}`,
                 borderRadius: '0',

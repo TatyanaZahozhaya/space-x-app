@@ -1,9 +1,11 @@
-import { SharedTypes } from '@shared';
+import { Hooks, SharedTypes } from '@shared';
 import { Home } from '@home';
 import { Rocket } from '@rocket';
 import { Capsule } from '@capsule';
 import { Mission } from '@mission';
 import { PageNotFound } from '@page_not_found';
+
+const { useRocketsQuery, useCapsulesQuery, useMissionsQuery } = Hooks;
 
 export enum Paths {
     HOME = '/',
@@ -37,5 +39,23 @@ export const AppRoutes: Array<SharedTypes.IRoute> = [
     {
         element: <PageNotFound />,
         path: Paths.PAGE_NOT_FOUND,
+    },
+];
+
+export const MenuRoutes: Array<SharedTypes.IMenuRoute> = [
+    {
+        name: 'ROCKET',
+        hook: useRocketsQuery,
+        path: Paths.ROCKET,
+    },
+    {
+        name: 'CAPSULE',
+        hook: useCapsulesQuery,
+        path: Paths.CAPSULE,
+    },
+    {
+        name: 'MISSION',
+        hook: useMissionsQuery,
+        path: Paths.MISSION,
     },
 ];

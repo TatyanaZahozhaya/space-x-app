@@ -45,9 +45,6 @@ export const MainPartContainer: FC<IContainer> = memo(({ children }) => {
                 mt: `${spacing(10)}`,
                 mb: `${spacing(2)}`,
                 gap: `${spacing(2)}`,
-                '@media (max-width:600px)': {
-                    mt: `${spacing(12)}`,
-                },
             }}>
             {children}
         </FlexBoxC>
@@ -81,6 +78,9 @@ export const MenuContainer: FC<IContainer> = memo(({ children }) => {
                     flexDirection: 'row',
                     justifyContent: 'center',
                     gap: `${spacing(2)}`,
+                    '@media (max-width:666px)': {
+                        display: 'none',
+                    },
                 }}>
                 {children}
             </FlexBoxC>
@@ -99,6 +99,10 @@ export const InfoPartContainer: FC<IContainer> = memo(({ children }) => {
                     width: '600px',
                     alignItems: 'flex-start',
                     padding: `${spacing(2)}`,
+                    '@media (max-width:670px)': {
+                        width: '100%',
+                        padding: `0 ${spacing(3)}`,
+                    },
                 }}>
                 {children}
             </FlexBoxC>
@@ -133,5 +137,41 @@ export const DetailsContainer: FC<IContainer> = memo(({ children }) => {
             }}>
             {children}
         </FlexBoxC>
+    );
+});
+
+export const SideMenuListContainer: FC<IContainer> = memo(({ children }) => {
+    return (
+        <Box
+            sx={{ width: 250 }}
+            role="presentation">
+            {children}
+        </Box>
+    );
+});
+
+export const HeaderMenuBox: FC<IContainer> = memo(({ children }) => {
+    return (
+        <Box
+            sx={{
+                '@media (max-width:666px)': {
+                    display: 'none',
+                },
+            }}>
+            {children}
+        </Box>
+    );
+});
+
+export const SideMenuBox: FC<IContainer> = memo(({ children }) => {
+    return (
+        <Box
+            sx={{
+                '@media (min-width:666px)': {
+                    display: 'none',
+                },
+            }}>
+            {children}
+        </Box>
     );
 });

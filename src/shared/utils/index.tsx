@@ -5,35 +5,17 @@ interface IResponse {
     id: string;
 }
 
-export const renderRocketMenuItem = (handleClose: () => void) => (item: IResponse) => {
+export const renderMenuItem = (onClick: (e: React.MouseEvent) => void, path: string) => (item: IResponse) => {
     return (
-        <SharedComponents.BasicRocketMenuItem
+        <SharedComponents.BasicMenuItem
             key={item.id}
-            onClick={handleClose}
+            path={path}
+            onClick={onClick}
             {...item}
         />
     );
 };
 
-export const renderCapsuleMenuItem = (handleClose: () => void) => (item: IResponse) => {
-    return (
-        <SharedComponents.BasicCapsuleMenuItem
-            key={item.id}
-            onClick={handleClose}
-            {...item}
-        />
-    );
-};
-
-export const renderMissionMenuItem = (handleClose: () => void) => (item: IResponse) => {
-    return (
-        <SharedComponents.BasicMissionMenuItem
-            key={item.id}
-            onClick={handleClose}
-            {...item}
-        />
-    );
-};
 
 
 export const renderGeneralParams = (item: SharedTypes.IOverviewParam) => {
