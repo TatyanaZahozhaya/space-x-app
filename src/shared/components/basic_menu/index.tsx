@@ -21,8 +21,7 @@ export const BasicMenu: FC<IBasicMenu> = ({ name, hook, path }) => {
         fetch();
     };
 
-    const handleClose = (event: React.KeyboardEvent | React.MouseEvent) => {
-        console.log(event.target);
+    const handleClose = () => {
         setAnchorEl(null);
     };
 

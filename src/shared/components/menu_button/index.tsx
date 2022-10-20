@@ -6,7 +6,7 @@ interface IMenuButton {
     onClick: any;
     onKeyDown?: any;
     id?: string;
-    ariaControls?: any;
+    ariaControls?: string | undefined;
     ariaHaspopup?: any;
     ariaExpanded?: any;
 }
